@@ -72,3 +72,32 @@ enum Status: String {
     case enter = "님이 들어왔습니다."
     case leave = "님이 나갔습니다."
 }
+
+
+////https://programmers.co.kr/learn/courses/30/lessons/77484
+func solution(_ lottos:[Int], _ win_nums:[Int]) -> [Int] {
+    var jokerCount = 0
+    var correctCount = 0
+    for my in lottos {
+        if my == 0 {
+            jokerCount += 1
+        }
+        for win in win_nums {
+            if my ^ win == 0 {
+                correctCount += 1
+            }
+        }
+    }
+    return [rank(correctCount+jokerCount), rank(correctCount)]
+}
+
+func rank(_ correctCount: Int) -> Int {
+    switch correctCount {
+    case 6: return 1
+    case 5: return 2
+    case 4: return 3
+    case 3: return 4
+    case 2: return 5
+    default: return 6
+    }
+}
