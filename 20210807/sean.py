@@ -19,3 +19,15 @@ def solution(record):
     for i in range(len(answer)):
         s = answer[i].split()
         answer[i] = (answer[i].replace(s[0], nameDict[s[0]])).replace(' ', "", 1)
+        
+def solution(lottos, win_nums):
+    base = 0
+    for i in lottos:
+        if i in win_nums:
+            base += 1
+    answer = [7 - base - lottos.count(0), 7 - base]
+    if answer[0] == 7:
+        answer[0] = 6
+    if answer[1] == 7:
+        answer[1] = 6
+    return answer
