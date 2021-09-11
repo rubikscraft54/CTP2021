@@ -23,7 +23,8 @@ func solution(_ brown:Int, _ yellow:Int) -> [Int] {
 
 func getDivs(value: Int) -> [Int] {
     var result:[Int] = []
-    for i in 3..<value {
+    let limit = value / 2
+    for i in 3...limit {
         if value % i == 0 {
             result.append(i)
         }
