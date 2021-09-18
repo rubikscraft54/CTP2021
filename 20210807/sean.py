@@ -31,3 +31,25 @@ def solution(lottos, win_nums):
     if answer[1] == 7:
         answer[1] = 6
     return answer
+  
+  def solution(scores):
+    n = len(scores)
+    answer = ''
+    for i in range(n):
+        col = [scores[j][i] for j in range(n)]
+        s = sum(col)
+        if (scores[i][i] == max(col) or scores[i][i] == min(col)) and col.count(scores[i][i]) == 1:
+            a = (s - scores[i][i]) / (n-1)
+        else:
+            a = s / n
+        if a < 50:
+            answer += 'F'
+        elif a < 70:
+            answer += 'D'
+        elif a < 80:
+            answer +='C'
+        elif a < 90:
+            answer += 'B'
+        else:
+            answer += 'A'
+    return answer
