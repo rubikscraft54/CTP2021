@@ -1,0 +1,22 @@
+def solution(rows, columns, queries):
+    base, mins = [], []
+    base_row = [x + 1 for x in range(columns)]
+    for y in range(rows):
+        base.append([x + y * columns for x in base_row])
+    for q in range(len(queries)):
+        x1, y1, x2, y2 = queries[q][0], queries[q][1], queries[q][2], queries[q][3]
+        top = [base[x1 - 1][y1]] + base[x1 - 1][y1 - 1 : y2 - 1]
+        bot = base[x2 - 1][y1 : y2] + [base[x2 - 2][y2 - 1]]
+        cur_min = min(top + bot)
+        for r in range(x2 - x1):
+            if base[x1 + r][y1 - 1] < cur_min:
+                cur_min = base[x1 + r][y1 - 1]
+            base[x1 + r - 1][y1 - 1] = base[x1 + r][y1 - 1]
+            if base[x2 - r - 2][y2 - 1] < cur_min:
+                cur_min = base[x2 - r - 2][y2 - 1]
+            base[x2 - r - 1][y2 - 1] = base[x2 - r - 2][y2 - 1]
+        for i in range(len(top)):
+            base[x1 - 1][y1 - 1 + i] = top[i]
+            base[x2 - 1][y1 - 1 + i] = bot[i]
+        mins.append(cur_min)
+    return mins
